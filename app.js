@@ -1,13 +1,15 @@
-const express = require("express");
+const express = require('express');
+const bodyParser = require('body-parser');
 
-const app = express();
-const bodyParser = require("body-parser");
-const cors = require('cors');
 const morgan = require('morgan');
+const cors = require('cors');
+
 const index = require('./routes/index');
 const hello = require('./routes/hello');
 
-const port = 1338;
+const app = express();
+
+const port = 1337;
 
 // This is middleware called for all routes.
 // Middleware takes three parameters.
@@ -20,14 +22,14 @@ if (process.env.NODE_ENV !== 'test') {
     app.use(morgan('combined')); // 'combined' outputs the Apache style LOGs
 }
 
+app.use(bodyParser.json()); // for parsing application/json
+app.use(bodyParser.urlencoded({ extended: true })); // for parsing application/x-www-form-urlencoded
+
 app.use((req, res, next) => {
     console.log(req.method);
     console.log(req.path);
     next();
 });
-
-app.use(bodyParser.json()); // for parsing application/json
-app.use(bodyParser.urlencoded({ extended: true })); // for parsing application/x-www-form-urlencoded
 
 
 app.use('/', index);

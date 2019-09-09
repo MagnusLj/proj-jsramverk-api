@@ -3,3 +3,9 @@ CREATE TABLE IF NOT EXISTS users (
     password VARCHAR(60) NOT NULL,
     UNIQUE(email)
 );
+
+CREATE TABLE IF NOT EXISTS stuff (
+    type VARCHAR(30) NOT NULL,
+    blahblah VARCHAR(300),
+    kmom INT(2)
+);

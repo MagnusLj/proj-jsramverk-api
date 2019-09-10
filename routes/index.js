@@ -1,14 +1,34 @@
 var express = require('express');
 var router = express.Router();
+// var app = express();
 
-router.get('/', function(req, res, next) {
-    const data = {
-        data: {
-            msg: "Hello Index World"
-        }
-    };
+const stuff = require("../models/stuff.js");
 
-    res.json(data);
-});
+// router.get('/', function(req, res, next) {
+//     const data = {
+//         data: {
+//             msg: stuff.getDescription(res, req)
+//         }
+//     };
+//
+//     res.json(data);
+// });
+
+router.get('/', (req, res) => stuff.getDescription(res, req));
+
+//
+// module.exports = router;
+
+// app.get("/", (req, res) => {
+//     const data = {
+//         data: {
+//             msg: req.params.msg
+//         }
+//     };
+//
+//     res.json(data);
+// });
+
+// router.get('/', (req, res) => stuff.getDescription(res, req));
 
 module.exports = router;

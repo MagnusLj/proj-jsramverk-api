@@ -9,7 +9,7 @@ const hello = require('./routes/hello');
 
 const app = express();
 
-const port = 8333;
+const port = 9001;
 
 // This is middleware called for all routes.
 // Middleware takes three parameters.
@@ -37,6 +37,14 @@ app.use('/hello', hello);
 
 
 // Testing routes with method
+app.get("/user", (req, res) => {
+    res.json({
+        data: {
+            msg: "Got a GET request, sending back default 200"
+        }
+    });
+});
+
 app.get("/user", (req, res) => {
     res.json({
         data: {

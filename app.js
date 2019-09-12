@@ -6,10 +6,11 @@ const cors = require('cors');
 
 const index = require('./routes/index');
 const hello = require('./routes/hello');
+const stuff = require('./models/stuff.js');
 
 const app = express();
 
-const port = 9001;
+const port = 8333;
 
 // This is middleware called for all routes.
 // Middleware takes three parameters.
@@ -34,6 +35,18 @@ app.use((req, res, next) => {
 
 app.use('/', index);
 app.use('/hello', hello);
+
+// app.get("/reports/week/:week", (req, res) => {
+//     const data = {
+//         data: {
+//             msg: req.params.msg
+//         }
+//     };
+//
+//     res.json(data);
+// });
+
+app.get('/reports/week/:week', (req, res) => stuff.getReport(res, req.params.week));
 
 
 // Testing routes with method

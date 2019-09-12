@@ -17,6 +17,23 @@ const stuff = {
             });
     },
 
+
+    // if (Number.isInteger(parseInt(productId))) {
+    //             db.get(
+
+
+
+    getReport: function(res, week, status=200) {
+        db.get("SELECT blahblah FROM stuff WHERE type = 'report_text' AND kmom = ?", week,
+            (err, rows) => {
+                if (err) {
+                    // return products.errorResponse(res, "/products", err);
+                }
+
+                res.status(200).json( {data: rows} );
+            });
+    },
+
     // getAllProducts: function(res, apiKey, status=200) {
     //     db.all("SELECT " + products.dataFields + " FROM products WHERE apiKey = ?",
     //         apiKey, (err, rows) => {

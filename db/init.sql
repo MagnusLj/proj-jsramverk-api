@@ -15,3 +15,45 @@ VALUES ('Här är en [länk till kursrepot på GitHub](https://github.com/Magnus
             om födelsedatumet är ifyllt och datumet är max 31 (jag lät i den här uppgiften bli att kolla för varje månads antal dagar och skottår),
             att året inte är i framtiden och
             att lösenorden är minst 8 tecken långa och matchar.', 'report_text', 2);
+
+INSERT INTO stuff (blahblah, type, kmom)
+VALUES ('Här är en [länk till kursrepot på GitHub](https://github.com/MagnusLj/jsramverk)
+
+Här nedan kommer texten från README.md
+
+```
+
+# me-vue
+
+## Project setup
+```
+npm install
+```
+
+### Compiles and hot-reloads for development
+```
+npm run serve
+```
+
+### Compiles and minifies for production
+```
+npm run build
+```
+
+### Run your tests
+```
+npm run test
+```
+
+### Lints and fixes files
+```
+npm run lint
+```
+
+### Customize configuration
+See [Configuration Reference]
+(https://cli.vuejs.org/config/).
+
+```
+'
+, 'report_text', 1);

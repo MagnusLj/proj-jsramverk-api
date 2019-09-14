@@ -35,16 +35,48 @@ const stuff = {
     },
 
 
+    // deleteReport: function(res, body) {
+    //     db.run("DELETE FROM stuff WHERE kmom = ?",
+    //     body.kmom,
+    //     function(err) {
+    //         if (err) {
+    //             return "error";
+    //         }
+    //         res.status(204).send();
+    //     });
+    // },
+
+
     deleteReport: function(res, body) {
-        db.run("DELETE FROM stuff WHERE kmom = ?",
-        body.kmom,
-        function(err) {
-            if (err) {
-                return "error";
-            }
-            res.status(204).send();
-        });
-    },
+     if (Number.isInteger(parseInt(body.kmom))) {
+         db.run("DELETE FROM stuff WHERE kmom = ?",
+             body.kmom,
+             body.id, (err) => {
+                 if (err) {
+                     return (err);
+                 }
+
+                 res.status(204).json({
+                     msg: {
+                         status: 204,
+                         detail: "Delete request" +
+                             " sent."
+                     }
+             });
+     } else {
+         res.status(400).json({
+             errors: {
+                 status: 400,
+                 detail: "Required attribute kmom" +
+                     " was not included in the request."
+             }
+         });
+     }
+ },
+
+
+
+
 
 
     addOrEdit: function(res, body) {

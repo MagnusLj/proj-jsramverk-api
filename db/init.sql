@@ -57,3 +57,8 @@ See [Configuration Reference]
 ```
 '
 , 'report_text', 1);
+
+
+
+INSERT INTO stuff (blahblah, type, kmom)
+VALUES ('Provtext för vecka 3', 'report_text', 3);

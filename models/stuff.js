@@ -34,6 +34,34 @@ const stuff = {
             });
     },
 
+
+    deleteReport: function(res, body) {
+        db.run("DELETE FROM stuff WHERE kmom = ?",
+        body.kmom,
+        function(err) {
+            if (err) {
+                return "error";
+            }
+            res.status(204).send();
+        });
+    },
+
+
+    addOrEdit: function(res, body) {
+        db.run("INSERT INTO stuff (blahblah, type, kmom)" +
+            " VALUES (?, ?, ?)",
+        body.blahblah,
+        body.type,
+        body.kmom,
+        function(err) {
+            if (err) {
+                return "error";
+            }
+
+        });
+    },
+
+
     // getAllProducts: function(res, apiKey, status=200) {
     //     db.all("SELECT " + products.dataFields + " FROM products WHERE apiKey = ?",
     //         apiKey, (err, rows) => {

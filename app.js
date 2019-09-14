@@ -84,6 +84,13 @@ app.post("/user", (req, res) => {
     });
 });
 
+
+app.delete('/', (req, res) => stuff.deleteReport(res, req.body));
+
+app.post('/', (req, res) => stuff.addOrEdit(res, req.body));
+
+
+
 app.put("/user", (req, res) => {
     // PUT requests should return 204 No Content
      res.status(204).send();

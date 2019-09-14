@@ -62,6 +62,7 @@ const stuff = {
                          detail: "Delete request" +
                              " sent."
                      }
+                 });
              });
      } else {
          res.status(400).json({

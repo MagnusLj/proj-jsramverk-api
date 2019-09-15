@@ -10,7 +10,7 @@ const stuff = require('./models/stuff.js');
 
 const app = express();
 
-const port = 2299;
+const port = 8333;
 
 // This is middleware called for all routes.
 // Middleware takes three parameters.

@@ -80,7 +80,7 @@ const stuff = {
 
 
 
-    addOrEdit: function(res, body) {
+    addOrEdit: function(res, body, status=201) {
         db.run("INSERT INTO stuff (blahblah, type, kmom)" +
             " VALUES (?, ?, ?)",
         body.blahblah,
@@ -88,7 +88,7 @@ const stuff = {
         body.kmom,
         function(err) {
             if (err) {
-                return "error";
+                return (err);
             }
 
         });

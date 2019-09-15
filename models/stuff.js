@@ -69,7 +69,7 @@ const stuff = {
              errors: {
                  status: 400,
                  detail: "Required attribute kmom" +
-                     " was not included in the request."
+                     " was not included in the request (deleteReport)."
              }
          });
      }
@@ -103,7 +103,7 @@ const stuff = {
           errors: {
               status: 400,
               detail: "Required attribute kmom" +
-                  " was not included in the request."
+                  " was not included in the request (addOrEdit)."
           }
       });
   }

@@ -78,21 +78,54 @@ const stuff = {
 
 
 
+ addOrEdit: function(res, body) {
+  if (Number.isInteger(parseInt(body.kmom))) {
+      db.run("INSERT INTO stuff (blahblah, type, kmom)" +
+          " VALUES (?, ?, ?)",
+          body.blahblah,
+          body.type,
+          body.kmom,
+        (err) => {
+              if (err) {
+                  return (err);
+              }
+
+              res.status(204).json({
+                  msg: {
+                      status: 204,
+                      detail: "POST request" +
+                          " sent."
+                  }
+              });
+          });
+  } else {
+      res.status(400).json({
+          errors: {
+              status: 400,
+              detail: "Required attribute kmom" +
+                  " was not included in the request."
+          }
+      });
+  }
+ },
 
 
-    addOrEdit: function(res, body, status=201) {
-        db.run("INSERT INTO stuff (blahblah, type, kmom)" +
-            " VALUES (?, ?, ?)",
-        body.blahblah,
-        body.type,
-        body.kmom,
-        function(err) {
-            if (err) {
-                return (err);
-            }
 
-        });
-    },
+
+
+    // addOrEdit: function(res, body, status=201) {
+    //     db.run("INSERT INTO stuff (blahblah, type, kmom)" +
+    //         " VALUES ('test', 'report_text', 3)",
+    //     // body.blahblah,
+    //     // body.type,
+    //     // body.kmom,
+    //     function(err) {
+    //         if (err) {
+    //             return (err);
+    //         }
+    //
+    //     });
+    // },
 
 
     // getAllProducts: function(res, apiKey, status=200) {

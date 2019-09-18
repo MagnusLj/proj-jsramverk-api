@@ -1,5 +1,7 @@
 const sqlite3 = require('sqlite3').verbose();
 const db = new sqlite3.Database('./db/texts.sqlite');
+const bcrypt = require('bcryptjs');
+const saltRounds = 1;
 
 const stuff = {
     // dataFields: "ROWID as id, articleNumber as article_number," +
@@ -110,6 +112,129 @@ const stuff = {
  },
 
 
+
+ // bcrypt.hash(myPlaintextPassword, saltRounds, function(err, hash) {
+ //     // spara lösenord i databasen.
+ // });
+
+ newUserStorage: function (res, body) {
+     // console.log(body.month);
+     this.bcryptsome(res, body)
+     .then(function(result) {
+         return stuff.storeUser(res, body, result)
+ })
+ .catch(function(err) {
+     console.log(err);
+ });
+},
+
+bcryptsome: function (res, body) {
+    let somehash = bcrypt.hash(body.password, saltRounds);
+    console.log(body.year);
+    // console.log(somehash);
+    // console.log(body.password);
+    return somehash;
+},
+
+
+
+storeUser: function (res, body, result) {
+    // let hashisch = bcrypt.hash(body.password, saltRounds);
+    //let hashisch = "braja";
+        // stuff.register(hash, res, body);
+
+        if (Number.isInteger(parseInt(body.day)) &&
+        Number.isInteger(parseInt(body.year))) {
+            db.run("INSERT INTO users (name, email, password, day, month, year)" +
+                " VALUES (?, ?, ?, ?, ?, ?)",
+                body.name,
+                body.email,
+                result,
+                body.day,
+                body.month,
+                body.year,
+              function (err) {
+                    if (err)
+                    {
+                        console.log(result);
+                        return stuff.errorResponse(res, "POST/register", err);
+
+                    //     return ("Database error");
+                    // }
+
+                    // res.status(204).json({
+                    //     msg: {
+                    //         status: 204,
+                    //         detail: "POST request" +
+                    //             " sent.",
+                    //         error: err
+                    //     }
+                    //
+                    // });
+                }
+                res.status(204).json({
+                    msg: {
+                        status: 204,
+                        detail: "POST request" +
+                            " sent.",
+                        error: err
+                    }
+
+                });
+
+
+                });
+        } else {
+            res.status(400).json({
+                errors: {
+                    status: 400,
+                    detail: "Required attribute " +
+                        " was not included in the request.",
+                    name: body.name,
+                    hash: hashisch
+                }
+            });
+        }
+
+
+},
+
+
+
+ // register: function(hash, res, body) {
+ //  if (Number.isInteger(parseInt(body.day)) &&
+ //  Number.isInteger(parseInt(body.year))) {
+ //      db.run("INSERT INTO users (name, email, password, day, month, year)" +
+ //          " VALUES (?, ?, ?, ?, ?, ?)",
+ //          body.name,
+ //          body.email,
+ //          hash,
+ //          body.day,
+ //          body.month,
+ //          body.year,
+ //        (err) => {
+ //              if (err) {
+ //                  return (err);
+ //              }
+ //
+ //              res.status(204).json({
+ //                  msg: {
+ //                      status: 204,
+ //                      detail: "POST request" +
+ //                          " sent."
+ //                  }
+ //              });
+ //          });
+ //  } else {
+ //      res.status(400).json({
+ //          errors: {
+ //              status: 400,
+ //              detail: "Required attribute " +
+ //                  " was not included in the request."
+ //          }
+ //      });
+ //  }
+ // },
 
 
 

@@ -89,6 +89,8 @@ app.delete('/', (req, res) => stuff.deleteReport(res, req.body));
 
 app.post('/', (req, res) => stuff.addOrEdit(res, req.body));
 
+app.post('/register', (req, res) => stuff.newUserStorage(res, req.body));
+
 
 
 app.put("/user", (req, res) => {

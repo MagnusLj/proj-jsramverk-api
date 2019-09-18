@@ -1,7 +1,8 @@
 const sqlite3 = require('sqlite3').verbose();
 const db = new sqlite3.Database('./db/texts.sqlite');
 const bcrypt = require('bcryptjs');
-const saltRounds = 1;
+const saltRounds = 10;
+const jwt = require('jsonwebtoken');
 
 const stuff = {
     // dataFields: "ROWID as id, articleNumber as article_number," +
@@ -130,7 +131,7 @@ const stuff = {
 
 bcryptsome: function (res, body) {
     let somehash = bcrypt.hash(body.password, saltRounds);
-    console.log(body.year);
+    // console.log(body.year);
     // console.log(somehash);
     // console.log(body.password);
     return somehash;
@@ -197,6 +198,115 @@ storeUser: function (res, body, result) {
         }
 
 
+},
+
+
+
+
+
+userLogin: function (res, body) {
+    // console.log(body.month);
+    this.findUser(res, body)
+    .then(function(result) {
+        return stuff.storeUser(res, body, result)
+})
+.catch(function(err) {
+    console.log(err);
+});
+},
+
+
+findUser: function(res, body) {
+        const email = body.email;
+        const password = body.password;
+
+        if (!email || !password) {
+            return res.status(401).json({
+                errors: {
+                    status: 401,
+                    source: "/login",
+                    title: "Email or password missing",
+                    detail: "Email or password missing in request"
+                }
+            });
+        }
+
+        db.get("SELECT * FROM users WHERE email = ?",
+            email,
+            (err, rows) => {
+                if (err) {
+                    return res.status(500).json({
+                        errors: {
+                            status: 500,
+                            source: "/login",
+                            title: "Database error",
+                            detail: err.message
+                        }
+                    });
+                }
+
+                if (rows === undefined) {
+                    return res.status(401).json({
+                        errors: {
+                            status: 401,
+                            source: "/login",
+                            title: "User not found",
+                            email: email,
+                            detail: "User with provided email not found."
+                        }
+                    });
+                }
+
+                const user = rows;
+
+                bcrypt.compare(password, user.password, (err, result) => {
+                    if (err) {
+                        return res.status(500).json({
+                            errors: {
+                                status: 500,
+                                source: "/login",
+                                title: "bcrypt error",
+                                detail: "bcrypt error"
+                            }
+                        });
+                    }
+
+                    if (result) {
+                        console.log(user.email);
+
+                        let payload = { email: user.email };
+                        const secret = process.env.JWT_SECRET;
+                        console.log(secret);
+                        let token = jwt.sign(payload, secret, { expiresIn: '1h' });
+
+                        return res.json({
+                            data: {
+                                type: "success",
+                                message: "User logged in",
+                                user: payload,
+                                token: token
+                            }
+                        });
+                    }
+
+                    return res.status(401).json({
+                        errors: {
+                            status: 401,
+                            source: "/login",
+                            title: "Wrong password",
+                            detail: "Password is incorrect."
+                        }
+                    });
+                });
+            });
+    },
+
+bcryptCheck: function (res, body) {
+   let somehash = bcrypt.hash(body.password, saltRounds);
+   // console.log(body.year);
+   // console.log(somehash);
+   // console.log(body.password);
+   return somehash;
 },
 
 

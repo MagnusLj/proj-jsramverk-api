@@ -91,6 +91,7 @@ app.post('/', (req, res) => stuff.addOrEdit(res, req.body));
 
 app.post('/register', (req, res) => stuff.newUserStorage(res, req.body));
 
+app.post('/login', (req, res) => stuff.findUser(res, req.body));
 
 
 app.put("/user", (req, res) => {

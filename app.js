@@ -85,9 +85,35 @@ app.post("/user", (req, res) => {
 });
 
 
-app.delete('/', (req, res) => stuff.deleteReport(res, req.body));
+// app.delete('/', (req, res) => stuff.deleteReport(res, req.body));
 
-app.post('/', (req, res) => stuff.addOrEdit(res, req.body));
+// app.post('/', (req, res) => stuff.addOrEdit(res, req.body));
+
+
+app.delete("/",
+    (req, res, next) => stuff.checkToken(req, res, next),
+    (req, res) => stuff.deleteReport(res, req.body));
+
+
+app.post("/",
+    (req, res, next) => stuff.checkToken(req, res, next),
+    (req, res) => stuff.addOrEdit(res, req.body));
+
+// function checkToken(req, res, next) {
+//     const token = req.headers['x-access-token'];
+//
+//     jwt.verify(token, process.env.JWT_SECRET, function(err, decoded) {
+//         if (err) {
+//             // send error response
+//         }
+//
+//         // Valid token send on the request
+//         next();
+//     });
+// }
+
+
+
 
 app.post('/register', (req, res) => stuff.newUserStorage(res, req.body));
 

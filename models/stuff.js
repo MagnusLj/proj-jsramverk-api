@@ -114,6 +114,32 @@ const stuff = {
 
 
 
+
+ checkToken: function (req, res, next) {
+     const token = req.headers['x-access-token'];
+
+     jwt.verify(token, process.env.JWT_SECRET, function(err, decoded) {
+         if (err) {
+             // send error response
+             return res.status(401).json({
+                errors: {
+                    status: 401,
+                    source: req.path,
+                    title: "No token",
+                    detail: "No token provided in request headers"
+                }
+            });
+         }
+
+         // Valid token send on the request
+         next();
+
+        // this.addOrEdit(res, body);
+
+     });
+ },
+
+
  // bcrypt.hash(myPlaintextPassword, saltRounds, function(err, hash) {
  //     // spara lösenord i databasen.
  // });

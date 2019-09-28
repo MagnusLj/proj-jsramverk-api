@@ -1,5 +1,6 @@
 const sqlite3 = require('sqlite3').verbose();
-const db = new sqlite3.Database('./db/texts.sqlite');
+// const db = new sqlite3.Database('./db/texts.sqlite');
+const db = require("../db/database.js");
 const bcrypt = require('bcryptjs');
 const saltRounds = 10;
 const jwt = require('jsonwebtoken');
@@ -243,6 +244,8 @@ userLogin: function (res, body) {
 
 
 findUser: function(res, body) {
+        console.log("res: ");
+        console.log(res);
         const email = body.email;
         const password = body.password;
 
@@ -328,12 +331,15 @@ findUser: function(res, body) {
     },
 
 bcryptCheck: function (res, body) {
+    console.log(body);
    let somehash = bcrypt.hash(body.password, saltRounds);
+
    // console.log(body.year);
    // console.log(somehash);
    // console.log(body.password);
    return somehash;
 },
+
 
 
 

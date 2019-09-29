@@ -5,7 +5,7 @@
   "main": "app.js",
   "scripts": {
     "pretest": "bash db/reset_test_db.bash",
-    "test": "PORT=8333 npm start & nyc --reporter=html --reporter=text --reporter=clover mocha --timeout 10000 'test/**/*.js'",
+    "test": "PORT=8333 & nyc --reporter=html --reporter=text --reporter=clover mocha --timeout 10000 'test/**/*.js'",
     "start": "node app.js",
     "clean": "rm -rf node_modules package-lock.json",
     "eslint": "eslint ."

@@ -5,7 +5,7 @@ const morgan = require('morgan');
 const cors = require('cors');
 
 const index = require('./routes/index');
-const hello = require('./routes/hello');
+// const hello = require('./routes/hello');
 const stuff = require('./models/stuff.js');
 
 const app = express();
@@ -34,7 +34,7 @@ app.use((req, res, next) => {
 
 
 app.use('/', index);
-app.use('/hello', hello);
+// app.use('/hello', hello);
 
 // app.get("/reports/week/:week", (req, res) => {
 //     const data = {
@@ -50,39 +50,39 @@ app.get('/reports/week/:week', (req, res) => stuff.getReport(res, req.params.wee
 
 
 // Testing routes with method
-app.get("/user", (req, res) => {
-    res.json({
-        data: {
-            msg: "Got a GET request, sending back default 200"
-        }
-    });
-});
-
-app.get("/user", (req, res) => {
-    res.json({
-        data: {
-            msg: "Got a GET request, sending back default 200"
-        }
-    });
-});
-
-app.get("/hello/:msg", (req, res) => {
-    const data = {
-        data: {
-            msg: req.params.msg
-        }
-    };
-
-    res.json(data);
-});
-
-app.post("/user", (req, res) => {
-    res.status(201).json({
-        data: {
-            msg: "Got a POST request, sending back 201 Created"
-        }
-    });
-});
+// app.get("/user", (req, res) => {
+//     res.json({
+//         data: {
+//             msg: "Got a GET request, sending back default 200"
+//         }
+//     });
+// });
+//
+// app.get("/user", (req, res) => {
+//     res.json({
+//         data: {
+//             msg: "Got a GET request, sending back default 200"
+//         }
+//     });
+// });
+//
+// app.get("/hello/:msg", (req, res) => {
+//     const data = {
+//         data: {
+//             msg: req.params.msg
+//         }
+//     };
+//
+//     res.json(data);
+// });
+//
+// app.post("/user", (req, res) => {
+//     res.status(201).json({
+//         data: {
+//             msg: "Got a POST request, sending back 201 Created"
+//         }
+//     });
+// });
 
 
 // app.delete('/', (req, res) => stuff.deleteReport(res, req.body));
@@ -120,15 +120,15 @@ app.post('/register', (req, res) => stuff.newUserStorage(res, req.body));
 app.post('/login', (req, res) => stuff.findUser(res, req.body));
 
 
-app.put("/user", (req, res) => {
-    // PUT requests should return 204 No Content
-     res.status(204).send();
-});
-
-app.delete("/user", (req, res) => {
-    // DELETE requests should return 204 No Content
-     res.status(204).send();
-});
+// app.put("/user", (req, res) => {
+//     // PUT requests should return 204 No Content
+//      res.status(204).send();
+// });
+//
+// app.delete("/user", (req, res) => {
+//     // DELETE requests should return 204 No Content
+//      res.status(204).send();
+// });
 
 
 

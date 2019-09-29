@@ -26,52 +26,67 @@ describe('Reports', () => {
         });
     });
 
-        describe('/reports/week/2', () => {
-            it('200', (done) => {
-                chai.request(server)
-                    .get("/reports/week/2")
-                    .end((err, res) => {
-                        res.should.have.status(200);
-                        res.body.should.be.an("object");
-                        res.body.data.blahblah.should.be.an("string");
-                        res.body.data.blahblah.length.should.be.above(0);
+    // describe('/reports/week/2', () => {
+    //     it('200', (done) => {
+    //         chai.request(server)
+    //             .get("/reports/week/2")
+    //             .end((err, res) => {
+    //                 res.should.have.status(200);
+    //                 res.body.should.be.an("object");
+    //                 res.body.data.blahblah.should.be.an("string");
+    //                 res.body.data.blahblah.length.should.be.above(0);
+    //
+    //                 done();
+    //             });
+    //     });
+    // });
+    //
+    // describe('/reports/week/3', () => {
+    //     it('200', (done) => {
+    //         chai.request(server)
+    //             .get("/reports/week/3")
+    //             .end((err, res) => {
+    //                 res.should.have.status(200);
+    //                 res.body.should.be.an("object");
+    //                 res.body.data.blahblah.should.be.an("string");
+    //                 res.body.data.blahblah.length.should.be.above(0);
+    //
+    //                 done();
+    //             });
+    //     });
+    // });
+        //
+        //
+        // describe('/reports/week/3', () => {
+        //     it('200', (done) => {
+        //         chai.request(server)
+        //             .get("/reports/week/3")
+        //             .end((err, res) => {
+        //                 res.should.have.status(200);
+        //                 res.body.should.be.an("object");
+        //                 res.body.data.blahblah.should.be.an("string");
+        //                 res.body.data.blahblah.length.should.be.above(0);
+        //
+        //                 done();
+        //             });
+        //     });
+        // });
 
-                        done();
-                    });
-            });
-        });
 
-
-        describe('/reports/week/3', () => {
-            it('200', (done) => {
-                chai.request(server)
-                    .get("/reports/week/3")
-                    .end((err, res) => {
-                        res.should.have.status(200);
-                        res.body.should.be.an("object");
-                        res.body.data.blahblah.should.be.an("string");
-                        res.body.data.blahblah.length.should.be.above(0);
-
-                        done();
-                    });
-            });
-        });
-
-
-        describe('/', () => {
-            it('200', (done) => {
-                chai.request(server)
-                    .get("/")
-                    .end((err, res) => {
-                        res.should.have.status(200);
-                        res.body.should.be.an("object");
-                        res.body.data.blahblah.should.be.an("string");
-                        res.body.data.blahblah.length.should.be.above(0);
-
-                        done();
-                    });
-            });
-        });
+        // describe('', () => {
+        //     it('200', (done) => {
+        //         chai.request(server)
+        //             .get('')
+        //             .end((err, res) => {
+        //                 res.should.have.status(200);
+        //                 res.body.should.be.an("object");
+        //                 res.body.data.blahblah.should.be.an("string");
+        //                 res.body.data.blahblah.length.should.be.above(0);
+        //
+        //                 done();
+        //             });
+        //     });
+        // });
 
 
 

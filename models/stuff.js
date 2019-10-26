@@ -34,6 +34,18 @@ const stuff = {
     },
 
 
+    storeInfo: function(res, body, status=201) {
+        db.run("UPDATE users SET apples = ?, pears = ?, bananas = ?, balance = ? WHERE email = ?",
+        body.apples, body.pears, body.bananas, body.balance, body.email,
+            (err, rows) => {
+                if (err) {
+                    // return products.errorResponse(res, "/products", err);
+                }
+
+                res.status(201).json( {data: rows} );
+            });
+    },
+
 
 
     // if (Number.isInteger(parseInt(productId))) {

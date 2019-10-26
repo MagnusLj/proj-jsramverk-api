@@ -67,6 +67,8 @@ app.post('/login', (req, res) => stuff.findUser(res, req.body));
 
 app.post('/getaccount', (req, res) => stuff.sendInfo(res, req.body));
 
+app.post('/updateaccount', (req, res) => stuff.storeInfo(res, req.body));
+
 
 // Add routes for 404 and error handling
 // Catch 404 and forward to error handler

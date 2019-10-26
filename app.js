@@ -10,7 +10,9 @@ const stuff = require('./models/stuff.js');
 
 const app = express();
 
-const port = 8333;
+// Access-Control-Allow-Origin: http://localhost:5333
+
+const port = 5333;
 
 // This is middleware called for all routes.
 // Middleware takes three parameters.
@@ -49,47 +51,6 @@ app.use('/', index);
 app.get('/reports/week/:week', (req, res) => stuff.getReport(res, req.params.week));
 
 
-// Testing routes with method
-// app.get("/user", (req, res) => {
-//     res.json({
-//         data: {
-//             msg: "Got a GET request, sending back default 200"
-//         }
-//     });
-// });
-//
-// app.get("/user", (req, res) => {
-//     res.json({
-//         data: {
-//             msg: "Got a GET request, sending back default 200"
-//         }
-//     });
-// });
-//
-// app.get("/hello/:msg", (req, res) => {
-//     const data = {
-//         data: {
-//             msg: req.params.msg
-//         }
-//     };
-//
-//     res.json(data);
-// });
-//
-// app.post("/user", (req, res) => {
-//     res.status(201).json({
-//         data: {
-//             msg: "Got a POST request, sending back 201 Created"
-//         }
-//     });
-// });
-
-
-// app.delete('/', (req, res) => stuff.deleteReport(res, req.body));
-
-// app.post('/', (req, res) => stuff.addOrEdit(res, req.body));
-
-
 app.delete("/",
     (req, res, next) => stuff.checkToken(req, res, next),
     (req, res) => stuff.deleteReport(res, req.body));
@@ -99,37 +60,12 @@ app.post("/",
     (req, res, next) => stuff.checkToken(req, res, next),
     (req, res) => stuff.addOrEdit(res, req.body));
 
-// function checkToken(req, res, next) {
-//     const token = req.headers['x-access-token'];
-//
-//     jwt.verify(token, process.env.JWT_SECRET, function(err, decoded) {
-//         if (err) {
-//             // send error response
-//         }
-//
-//         // Valid token send on the request
-//         next();
-//     });
-// }
-
-
-
 
 app.post('/register', (req, res) => stuff.newUserStorage(res, req.body));
 
 app.post('/login', (req, res) => stuff.findUser(res, req.body));
 
-
-// app.put("/user", (req, res) => {
-//     // PUT requests should return 204 No Content
-//      res.status(204).send();
-// });
-//
-// app.delete("/user", (req, res) => {
-//     // DELETE requests should return 204 No Content
-//      res.status(204).send();
-// });
-
+app.post('/getaccount', (req, res) => stuff.sendInfo(res, req.body));
 
 
 // Add routes for 404 and error handling

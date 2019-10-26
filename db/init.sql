@@ -18,54 +18,54 @@ VALUES (
 ;
 
 
-INSERT INTO stuff (
-    type,
-    blahblah
-)
+-- INSERT INTO stuff (
+--     type,
+--     blahblah
+-- )
+--
+-- VALUES (
+--     "description_text",
+--     "Hej, här är min testgrej."
+-- )
+--
+-- ;
+--
+-- INSERT INTO stuff (
+--     type,
+--     blahblah,
+--     kmom
+-- )
+-- VALUES (
+--     "report_text",
+--     "Testtext för redovisning 1.",
+--     1
+-- )
+--
+-- ;
 
-VALUES (
-    "description_text",
-    "Hej, här är min testgrej."
-)
-
-;
-
-INSERT INTO stuff (
-    type,
-    blahblah,
-    kmom
-)
-VALUES (
-    "report_text",
-    "Testtext för redovisning 1.",
-    1
-)
-
-;
-
-INSERT INTO stuff (
-    type,
-    blahblah,
-    kmom
-)
-VALUES (
-    "report_text",
-    "Testtext för redovisning 2.",
-    2
-)
-
-;
-
-
-INSERT INTO stuff (
-    type,
-    blahblah,
-    kmom
-)
-VALUES (
-    "report_text",
-    "Testtext för redovisning 3.",
-    3
-)
-
-;
+-- INSERT INTO stuff (
+--     type,
+--     blahblah,
+--     kmom
+-- )
+-- VALUES (
+--     "report_text",
+--     "Testtext för redovisning 2.",
+--     2
+-- )
+--
+-- ;
+--
+--
+-- INSERT INTO stuff (
+--     type,
+--     blahblah,
+--     kmom
+-- )
+-- VALUES (
+--     "report_text",
+--     "Testtext för redovisning 3.",
+--     3
+-- )
+--
+-- ;

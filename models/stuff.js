@@ -22,6 +22,20 @@ const stuff = {
     },
 
 
+    sendInfo: function(res, body, status=200) {
+        db.get("SELECT apples, pears, bananas, balance FROM users WHERE email = ?", body.email,
+            (err, rows) => {
+                if (err) {
+                    // return products.errorResponse(res, "/products", err);
+                }
+
+                res.status(200).json( {data: rows} );
+            });
+    },
+
+
+
+
     // if (Number.isInteger(parseInt(productId))) {
     //             db.get(
 
@@ -173,8 +187,9 @@ storeUser: function (res, body, result) {
 
         if (Number.isInteger(parseInt(body.day)) &&
         Number.isInteger(parseInt(body.year))) {
-            db.run("INSERT INTO users (name, email, password, day, month, year)" +
-                " VALUES (?, ?, ?, ?, ?, ?)",
+            db.run("INSERT INTO users (name, email, password, day, month, year, " +
+            "apples, pears, bananas, balance)" +
+                " VALUES (?, ?, ?, ?, ?, ?, 0, 0, 0, 100000)",
                 body.name,
                 body.email,
                 result,
@@ -244,8 +259,8 @@ userLogin: function (res, body) {
 
 
 findUser: function(res, body) {
-        console.log("res: ");
-        console.log(res);
+        // console.log("res: ");
+        // console.log(res);
         const email = body.email;
         const password = body.password;
 
@@ -340,187 +355,6 @@ bcryptCheck: function (res, body) {
    return somehash;
 },
 
-
-
-
- // register: function(hash, res, body) {
- //  if (Number.isInteger(parseInt(body.day)) &&
- //  Number.isInteger(parseInt(body.year))) {
- //      db.run("INSERT INTO users (name, email, password, day, month, year)" +
- //          " VALUES (?, ?, ?, ?, ?, ?)",
- //          body.name,
- //          body.email,
- //          hash,
- //          body.day,
- //          body.month,
- //          body.year,
- //        (err) => {
- //              if (err) {
- //                  return (err);
- //              }
- //
- //              res.status(204).json({
- //                  msg: {
- //                      status: 204,
- //                      detail: "POST request" +
- //                          " sent."
- //                  }
- //              });
- //          });
- //  } else {
- //      res.status(400).json({
- //          errors: {
- //              status: 400,
- //              detail: "Required attribute " +
- //                  " was not included in the request."
- //          }
- //      });
- //  }
- // },
-
-
-
-    // addOrEdit: function(res, body, status=201) {
-    //     db.run("INSERT INTO stuff (blahblah, type, kmom)" +
-    //         " VALUES ('test', 'report_text', 3)",
-    //     // body.blahblah,
-    //     // body.type,
-    //     // body.kmom,
-    //     function(err) {
-    //         if (err) {
-    //             return (err);
-    //         }
-    //
-    //     });
-    // },
-
-
-    // getAllProducts: function(res, apiKey, status=200) {
-    //     db.all("SELECT " + products.dataFields + " FROM products WHERE apiKey = ?",
-    //         apiKey, (err, rows) => {
-    //             if (err) {
-    //                 return products.errorResponse(res, "/products", err);
-    //             }
-    //
-    //             res.status(status).json( { data: rows } );
-    //         });
-    // }
-
-    // getProduct: function(res, apiKey, productId, status=200) {
-    //     if (Number.isInteger(parseInt(productId))) {
-    //         db.get(
-    //             "SELECT " +
-    //             products.dataFields +
-    //             " FROM products WHERE apiKey = ? AND ROWID = ?",
-    //             apiKey,
-    //             productId, (err, row) => {
-    //                 if (err) {
-    //                     return products.errorResponse(res, "/product/:product_id", err);
-    //                 }
-    //
-    //                 res.status(status).json( { data: row } );
-    //             });
-    //     } else {
-    //         res.status(400).json({
-    //             errors: {
-    //                 status: 400,
-    //                 detail: "Required attribute product id " +
-    //                     " is not an integer."
-    //             }
-    //         });
-    //     }
-    // },
-
-    // searchProduct: function(res, apiKey, query) {
-    //     const searchQuery = "%" + query + "%";
-    //
-    //     db.all("SELECT " + products.dataFields + " FROM products WHERE apiKey = ? AND" +
-    //         " (productName LIKE ? OR productDescription LIKE ?)",
-    //     apiKey,
-    //     searchQuery,
-    //     searchQuery, (err, rows) => {
-    //         if (err) {
-    //             return products.errorResponse(res, "/product/search/:query", err);
-    //         }
-    //
-    //         res.json( { data: rows } );
-    //     });
-    // },
-
-    // addProduct: function(res, body) {
-    //     db.run("INSERT INTO products (articleNumber, productName," +
-    //         " productDescription, productSpecifiers, stock, location, price, apiKey)" +
-    //         " VALUES (?, ?, ?, ?, ?, ?, ?, ?)",
-    //     body.article_number,
-    //     body.name,
-    //     body.description,
-    //     body.specifiers,
-    //     body.stock,
-    //     body.location,
-    //     parseInt(body.price) * 100,
-    //     body.api_key,
-    //     function(err) {
-    //         if (err) {
-    //             return products.errorResponse(res, "POST /product", err);
-    //         }
-    //
-    //         products.getProduct(res, body.api_key, this.lastID, 201);
-    //     });
-    // },
-
-    // updateProduct: function(res, body) {
-    //     if (Number.isInteger(parseInt(body.id))) {
-    //         db.run("UPDATE products SET articleNumber = ?, productName = ?," +
-    //             " productDescription = ?, productSpecifiers = ?," +
-    //             " stock = ?, location = ?, price = ?" +
-    //             " WHERE apiKey = ? AND ROWID = ?",
-    //         body.article_number,
-    //         body.name,
-    //         body.description,
-    //         body.specifiers,
-    //         body.stock,
-    //         body.location,
-    //         parseInt(body.price) * 100,
-    //         body.api_key,
-    //         body.id, (err) => {
-    //             if (err) {
-    //                 return products.errorResponse(res, "/product", err);
-    //             }
-    //
-    //             res.status(204).send();
-    //         });
-    //     } else {
-    //         res.status(400).json({
-    //             errors: {
-    //                 status: 400,
-    //                 detail: "Required attribute product id (id)" +
-    //                     " was not included in the request."
-    //             }
-    //         });
-    //     }
-    // },
-
-    // deleteProduct: function(res, body) {
-    //     if (Number.isInteger(parseInt(body.id))) {
-    //         db.run("DELETE FROM products WHERE apiKey = ? AND ROWID = ?",
-    //             body.api_key,
-    //             body.id, (err) => {
-    //                 if (err) {
-    //                     return products.errorResponse(res, "/product", err);
-    //                 }
-    //
-    //                 res.status(204).send();
-    //             });
-    //     } else {
-    //         res.status(400).json({
-    //             errors: {
-    //                 status: 400,
-    //                 detail: "Required attribute product id (id)" +
-    //                     " was not included in the request."
-    //             }
-    //         });
-    //     }
-    // },
 
     errorResponse: function(res, path, err) {
         return res.status(500).json({

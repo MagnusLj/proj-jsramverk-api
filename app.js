@@ -57,7 +57,7 @@ app.delete("/",
 
 
 app.post("/",
-    (req, res, next) => stuff.checkToken(req, res, next),
+    // (req, res, next) => stuff.checkToken(req, res, next),
     (req, res) => stuff.addOrEdit(res, req.body));
 
 
@@ -65,8 +65,8 @@ app.post('/register', (req, res) => stuff.newUserStorage(res, req.body));
 
 app.post('/login', (req, res) => stuff.findUser(res, req.body));
 
-app.post('/getaccount', 
-(req, res, next) => stuff.checkToken(req, res, next),
+app.post('/getaccount',
+// (req, res, next) => stuff.checkToken(req, res, next),
 (req, res) => stuff.sendInfo(res, req.body));
 
 app.post('/updateaccount', (req, res) => stuff.storeInfo(res, req.body));
